@@ -32,6 +32,12 @@ module.exports = {
       description: "User's Description",
     },
 
+    phoneNumber: {
+      type: "string",
+      required: true,
+      description: "Phone Number",
+    },
+
     avatarImageURL: {
       type: "string",
       description: "User's Avatar Image URL",
