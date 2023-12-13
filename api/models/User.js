@@ -28,12 +28,10 @@ module.exports = {
       unique: true,
     },
 
-    userAccountType:{
-      type:'string',
-      isIn:[
-        'student',
-        'teacher'
-      ]
+    userAccountType: {
+      type: "string",
+      isIn: ["student", "teacher"],
+      required: true,
     },
 
     emailVerificationStatus: {
@@ -74,5 +72,10 @@ module.exports = {
         "A JS timestamp (epoch ms) representing the moment when this user last logged in.",
       example: 1502844074211,
     },
+    
+    communities:{
+      collection:'community',
+      via:'user'
+    }
   },
 };
