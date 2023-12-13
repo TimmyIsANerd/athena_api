@@ -72,6 +72,11 @@ module.exports = {
         "A JS timestamp (epoch ms) representing the moment when this user last logged in.",
       example: 1502844074211,
     },
+
+    courses:{
+      collection:'course',
+      via:"user"
+    },
     
     communities:{
       collection:'community',
