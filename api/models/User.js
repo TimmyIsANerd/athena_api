@@ -28,6 +28,14 @@ module.exports = {
       unique: true,
     },
 
+    userAccountType:{
+      type:'string',
+      isIn:[
+        'student',
+        'teacher'
+      ]
+    },
+
     emailVerificationStatus: {
       type: "string",
       description: "Email Verification Status, Unverified/Verified",
