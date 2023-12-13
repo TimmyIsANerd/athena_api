@@ -23,7 +23,9 @@
     "sails-hook-orm": "^4.0.0",
     "sails-hook-sockets": "^2.0.0",
     "sails-mongo": "^2.1.0",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "5.16.0"
@@ -31,6 +33,7 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "dev": "nodemon sails lift",
+    "swagger": "node_modules/.bin/swagger-jsdoc -c config/swagger.js -d assets/swagger.json",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
     "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
