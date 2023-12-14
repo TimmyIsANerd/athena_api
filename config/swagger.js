@@ -42,7 +42,10 @@ module.exports.swaggerConfig = {
       },
       version: "1.0.0",
     },
-    host: "localhost:1337",
+    host:
+      process.env === "production"
+        ? "athena-api-u1ee.onrender.com"
+        : "localhost:1337",
     externalDocs: {
       url: "athena-api-u1ee.onrender.com",
     },
