@@ -4,11 +4,14 @@ module.exports.swaggerConfig = {
       200: {
         description: "The requested resource",
       },
-      201:{
-        description:"New Resource Created"
+      201: {
+        description: "New Resource Created",
       },
       400: {
         description: "Bad Request",
+      },
+      409: {
+        description: "Conflict Error",
       },
       404: {
         description: "Resource not found",
