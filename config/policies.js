@@ -22,4 +22,6 @@ module.exports.policies = {
   "*": isAuth,
   "auth/signup": true,
   "auth/login": true,
+  swagger: true,
+  swaggerjson: true,
 };
