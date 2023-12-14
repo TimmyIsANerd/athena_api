@@ -78,7 +78,7 @@ module.exports = {
 
     const newUser = await User.create({
       emailAddress,
-      password,
+      password: await sails.helpers.passwords.hashPassword(password),
       userAccountType,
     })
       .intercept("E_UNIQUE", "emailAlreadyInUse")
