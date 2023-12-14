@@ -26,7 +26,7 @@ module.exports = {
 
     billingAddress: {
       type: "string",
-      description: "User's Description",
+      description: "User's Billing Address",
     },
 
     city: {
@@ -36,7 +36,7 @@ module.exports = {
 
     phoneNumber: {
       type: "string",
-      description: "Phone Number",
+      description: "User's Active Phone Number",
     },
 
     avatarImageURL: {
