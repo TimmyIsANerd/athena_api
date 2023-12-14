@@ -5,12 +5,17 @@ module.exports = {
 
   inputs: {},
 
-  exits: {},
+  exits: {
+    success: {
+      statusCode: 200,
+      description: "Successfully ",
+    },
+  },
 
-  fn: async function () {
+  fn: async function (inputs, exits) {
     const { res } = this;
 
-    return res.status(200).json({
+    return exits.success({
       message: "Athena Hub Server is Live 🚀",
     });
   },
