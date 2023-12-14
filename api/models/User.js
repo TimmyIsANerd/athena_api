@@ -73,14 +73,19 @@ module.exports = {
       example: 1502844074211,
     },
 
-    courses:{
-      collection:'course',
-      via:"user"
+    courses: {
+      collection: "course",
+      via: "user",
     },
-    
-    communities:{
-      collection:'community',
-      via:'user'
-    }
+
+    communities: {
+      collection: "community",
+      via: "user",
+    },
+
+    forums: {
+      collection: "forum",
+      via: "user",
+    },
   },
 };
