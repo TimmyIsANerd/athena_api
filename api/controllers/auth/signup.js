@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   friendlyName: "Signup",
 
-  description: "Signup auth.",
+  description: "User Sign Up",
 
   inputs: {
     firstName: {
