@@ -42,6 +42,7 @@ module.exports.swaggerConfig = {
       },
       version: "1.0.0",
     },
+    host: "https://athena-api-u1ee.onrender.com",
     securityDefinitions: {
       Authorization: {
         type: "apiKey",
