@@ -140,8 +140,54 @@ module.exports.routes = {
   },
 
   // Upload Profile Picture
-  'POST /api/v1/profile/avatar':{
-    action:'profile/upload-avatar'
-  }
+  "POST /api/v1/profile/avatar": {
+    action: "profile/upload-avatar",
+    swagger: {
+      consumes: ["multipart/form-data"],
+      parameters: [
+        {
+          name: "avatar",
+          in: "formData",
+          type: "file",
+          required: true,
+          description: "Select an image file to upload as the avatar.",
+        },
+      ],
+      responses: {
+        200: {
+          description: "Successfully uploaded avatar",
+          examples: {
+            "application/json": {
+              message: "Successfully uploaded Profile Avatar",
+            },
+          },
+        },
+        500: {
+          description: "Internal server error",
+        },
+        400: {
+          description: "No Uploaded File received by server",
+        },
+      },
+      securityDefinitions: {
+        BearerAuth: {
+          type: "apiKey",
+          description: "JWT Bearer Token",
+          name: "Authorization",
+          in: "header",
+        },
+      },
+      security: [
+        {
+          BearerAuth: [],
+        },
+      ],
+    },
+  },
 
+  // Create Course
+  "POST /api/v1/course/create-course": { action: "course/create-course" },
+  // Update Course
+
+  // Delete Course
 };
