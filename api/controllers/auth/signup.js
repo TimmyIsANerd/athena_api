@@ -6,6 +6,18 @@ module.exports = {
   description: "Signup auth.",
 
   inputs: {
+    firstName: {
+      type: "string",
+      required: true,
+      description: "User's First Name",
+    },
+
+    lastName: {
+      type: "string",
+      required: true,
+      descriotion: "User's Last Name",
+    },
+
     emailAddress: {
       type: "string",
       required: true,
@@ -36,11 +48,13 @@ module.exports = {
       description: "Successfully created a new user",
     },
     emailAlreadyInUse: {
+      statusCode: 400,
       responseType: "emailAlreadyInUse",
       description: "The provided email address / username is already in use.",
     },
     invalid: {
       responseType: "badRequest",
+      statusCode: 400,
       description:
         "The provided fullName, password and/or email address are invalid.",
       extendedDescription:
@@ -49,8 +63,11 @@ module.exports = {
     },
   },
 
-  fn: async function ({ emailAddress, password, userAccountType }) {
-    const { req, res } = this;
+  fn: async function (
+    { firstName, lastName, emailAddress, password, userAccountType },
+    exits
+  ) {
+    const { res } = this;
 
     if (password.length < 8) {
       return res.status(400).json({
@@ -72,12 +89,21 @@ module.exports = {
       return res.recordCreationFailed("Failed to Create New User");
     }
 
-    // Initialize New Profile
-    const newProfile = await Profile.create({
-      user: newUser.id,
-    });
+    try {
+      // Initialize New Profile
+      const newProfile = await Profile.create({
+        user: newUser.id,
+        firstName,
+        lastName,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: "Server Error",
+        message: "Failed to Create User Profile",
+      });
+    }
 
-    return res.status(201).json({
+    return exits.success({
       message: "Successfully created new profile",
       token: jwt.sign({ user: newUser.id }, process.env.JWT_SECRET, {
         expiresIn: "30d",
