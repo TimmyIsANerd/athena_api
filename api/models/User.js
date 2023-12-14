@@ -38,6 +38,7 @@ module.exports = {
       type: "string",
       description: "Email Verification Status, Unverified/Verified",
       isIn: ["Verified", "Unverified"],
+      defaultsTo: "Verified",
     },
 
     emailProofToken: {
