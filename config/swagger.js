@@ -22,7 +22,7 @@ module.exports.swaggerConfig = {
     },
     security: [
       {
-        Authorization: ["Bearer "],
+        BearerAuth: [],
       },
     ],
   },
@@ -42,20 +42,18 @@ module.exports.swaggerConfig = {
       },
       version: "1.0.0",
     },
-    host:
-      process.env === "production"
-        ? "athena-api-u1ee.onrender.com"
-        : "localhost:1337",
+    host: "localhost:1337",
     externalDocs: {
-      url: "athena-api-u1ee.onrender.com",
+      url: "localhost:1337",
     },
+    basePath: "/",
+    schemes: ["http", "https"],
     securityDefinitions: {
-      Authorization: {
+      BearerAuth: {
         type: "apiKey",
-        description: "user JWT Auth Token",
+        description: "JWT Bearer Token",
         name: "Authorization",
         in: "header",
-        flow: "password",
       },
     },
   },
