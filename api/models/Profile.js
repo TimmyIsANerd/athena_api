@@ -14,27 +14,28 @@ module.exports = {
 
     firstName: {
       type: "string",
-      required: true,
       description: "User's first name",
       example: "John",
     },
 
     lastName: {
       type: "string",
-      required: true,
       description: "User's last name",
       example: "Doe",
     },
 
     billingAddress: {
       type: "string",
-      required: true,
       description: "User's Description",
+    },
+
+    city: {
+      type: "string",
+      description: "User's City",
     },
 
     phoneNumber: {
       type: "string",
-      required: true,
       description: "Phone Number",
     },
 
