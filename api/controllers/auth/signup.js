@@ -104,7 +104,7 @@ module.exports = {
     }
 
     return exits.success({
-      message: "Successfully created new profile",
+      message: "Successfully created new user",
       token: jwt.sign({ user: newUser.id }, process.env.JWT_SECRET, {
         expiresIn: "30d",
       }),
