@@ -1,27 +1,46 @@
 /**
  * Forum.js
  *
- * @description :: A model definition represents a database table/collection.
+ * @description :: A model definition representing a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 
 module.exports = {
-
   attributes: {
-    title:{
-      type:'string',
-      description:"Forum Title"
+    name: {
+      type: 'string',
+      required: true,
+      description: 'Name of the forum',
     },
-
-    description:{
-      type:"string",
-      description:"Forum Inquiry or Description"
+    description: {
+      type: 'string',
+      description: 'Forum inquiry or description',
     },
-
-    user:{
-      model:'user'
-    }
+    communityId: {
+      model: 'Community',
+      description: 'Link to the community',
+    },
+    creatorId: {
+      model: 'User',
+      description: 'ID of the user who created the forum (tutor or student)',
+    },
+    type: {
+      type: 'string',
+      isIn: ['tutor', 'student'],
+      description: 'Forum type (tutor-led or student-created)',
+    },
+    community: {
+      model: 'Community',
+      via: 'forum',
+    },
+    comments: {
+      collection: 'Comments',
+      via: 'forum',
+      description: 'One-to-many relationship with comments',
+    },
+    user: {
+      collection: 'user',
+      via: 'Forum',
+    },
   },
-
 };
-

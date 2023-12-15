@@ -6,78 +6,93 @@
  */
 
 module.exports = {
-  friendlyName: 'Comment',
-
-  description: 'Post a Comment',
-
-  inputs: {
-    content: {
-      type: 'string',
-      required: true,
-      description: 'Content of the comment',
-    },
-
-    forumId: {
-      type: 'string',
-      required: true,
-      description: 'ID of the forum where the comment is posted',
-    },
-  },
-
-  exits: {
-    success: {
-      statusCode: 201,
-      description: 'Successfully posted a comment',
-    },
-    invalid: {
-      responseType: 'badRequest',
-      statusCode: 400,
-      description:
-        'The provided content and/or forum ID are invalid or missing.',
-    },
-    forumNotFound: {
-      statusCode: 404,
-      description: 'The specified forum was not found.',
-    },
-  },
-
-  fn: async function ({ content, forumId }, exits) {
-    const { res } = this;
-
-    if (!content || !forumId) {
-      return res.status(400).json({
-        message: 'Bad Request',
-        error: 'Content and forumId are required fields',
-      });
-    }
-
+  // POST /api/community/comments/:forumId
+  postComment: async (req, res) => {
     try {
-      const forum = await Forum.findOne({ id: forumId });
-      if (!forum) {
-        return res.status(404).json({
-          message: 'Forum not found',
-          error: 'The specified forum was not found.',
-        });
-      }
+      const { content, forumId } = req.body;
+      const userId = req.session.user.id; // Assume user session for logged-in user
 
-      const newComment = await Comment.create({
+      const comment = await Comment.create({
         content,
-        forum: forumId,
+        forumId,
+        userId,
       }).fetch();
 
-      if (!newComment) {
-        return res.status(500).json({
-          error: 'Server Error',
-          message: 'Failed to create a new comment',
+      res.json(comment);
+    } catch (error) {
+      res.serverError(error);
+    }
+  },
+
+  // POST /api/community/comments/reply/:commentId
+  postReply: async (req, res) => {
+    try {
+      const { content, commentId } = req.body;
+      const userId = req.session.user.id; // Assume user session for logged-in user
+
+      const parentComment = await Comment.findOne({ id: commentId });
+      if (!parentComment) {
+        return res.status(404).json({
+          message: 'Parent comment not found',
+          error: 'The specified parent comment was not found.',
         });
       }
 
-      return exits.success({
-        message: 'Successfully posted a new comment',
-        comment: newComment,
-      });
+      const comment = await Comment.create({
+        content,
+        forumId: parentComment.forumId,
+        userId,
+        replyTo: commentId,
+      }).fetch();
+
+      res.json(comment);
     } catch (error) {
-      return res.serverError(error);
+      res.serverError(error);
+    }
+  },
+
+  // PUT /api/community/comments/:id
+  updateComment: async (req, res) => {
+    try {
+      const { id, content } = req.body;
+      const updatedComment = await Comment.updateOne({ id })
+        .set({ content })
+        .catch((error) => {
+          throw error;
+        });
+
+      if (!updatedComment) {
+        return res.status(404).json({
+          message: 'Comment not found',
+          error: 'The specified comment was not found.',
+        });
+      }
+
+      res.json(updatedComment);
+    } catch (error) {
+      res.serverError(error);
+    }
+  },
+
+  // DELETE /api/community/comments/:id
+  deleteComment: async (req, res) => {
+    try {
+      const { id } = req.body;
+      const deletedComment = await Comment.destroyOne({ id })
+        .catch((error) => {
+          throw error;
+        });
+
+      if (!deletedComment) {
+        return res.status(404).json({
+          message: 'Comment not found',
+          error: 'The specified comment was not found.',
+        });
+      }
+
+      res.json({ message: 'Comment deleted successfully' });
+    } catch (error) {
+      res.serverError(error);
     }
   },
 };

@@ -7,24 +7,32 @@
 
 module.exports = {
   attributes: {
-    title: {
-      type: 'string',
-      description: 'Title of Community',
-    },
-
-    description: {
+    name: {
       type: 'string',
       required: true,
-      description: 'Description of Community',
+      description: 'Name of the community',
     },
-
-    posts:{
-      collection:'post',
-      via:'community'
+    description: {
+      type: 'string',
+      description: 'Description of the community',
     },
-
-    user:{
-      model:'user'
-    }
+    tutorId: {
+      model: 'User',
+      description: 'Link to the tutor account',
+    },
+    forums: {
+      collection: 'Forum',
+      via: 'community',
+      description: 'One-to-many relationship with forums',
+    },
+    posts: {
+      collection: 'Post',
+      via: 'community',
+      description: 'One-to-many relationship with posts',
+    },
+    user: {
+      model: 'User',
+      description: 'User associated with the community',
+    },
   },
 };

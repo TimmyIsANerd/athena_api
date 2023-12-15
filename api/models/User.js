@@ -83,8 +83,8 @@ module.exports = {
       via: "user",
     },
 
-    forums: {
-      collection: "forum",
+    Forum: {
+      collection: "Forum",
       via: "user",
     },
   },
