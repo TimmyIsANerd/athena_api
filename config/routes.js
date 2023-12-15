@@ -9,9 +9,20 @@
  */
 
 module.exports.routes = {
-  "/": { action: "home" },
+  '/': { action: 'home' },
 
   // User Authentication
-  "POST /api/v1/auth/signup": { action: "auth/signup", swagger: {} },
-  "POST /api/v1/auth/login": { action: "auth/login", swagger: {} },
+  'POST /api/v1/auth/signup': { action: 'auth/signup', swagger: {} },
+  'POST /api/v1/auth/login': { action: 'auth/login', swagger: {} },
+
+
+  // CommunityController routes
+  'GET /api/community': 'CommunityController.getCommunities',
+  'POST /api/community/tutors': 'CommunityController.createTutorCommunity',
+  'POST /api/community/students': 'CommunityController.createStudentForum',
+
+  // CommentController routes
+  'POST /api/community/comments/:forumId': 'CommentController.postComment',
+  'POST /api/community/comments/reply/:commentId': 'CommentController.postReply',
+
 };

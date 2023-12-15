@@ -8,14 +8,14 @@
 module.exports = {
   attributes: {
     title: {
-      type: "string",
-      description: "Title of Community",
+      type: 'string',
+      description: 'Title of Community',
     },
 
     description: {
-      type: "string",
+      type: 'string',
       required: true,
-      description: "Description of Community",
+      description: 'Description of Community',
     },
 
     posts:{
@@ -25,6 +25,6 @@ module.exports = {
 
     user:{
       model:'user'
-    }    
+    }
   },
 };
