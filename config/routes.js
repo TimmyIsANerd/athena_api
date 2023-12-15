@@ -27,4 +27,24 @@ module.exports.routes = {
   'POST /api/community/comments/reply/:commentId': 'CommentController.postReply',
   'PUT /api/community/comments/:id': 'CommentController.updateComment',
   'DELETE /api/community/comments/:id': 'CommentController.deleteComment',
+
+  // Progess routes
+  'POST /api/progress/:courseId/:pageId/read': 'ProgressController.updateProgress',
+  'POST /api/progress/:courseId/:videoId/watched': 'ProgressController.updateProgress',
+  'GET /api/progress/:courseId': 'ProgressController.getUserProgress',
+  'GET /api/progress/:courseId/completion-status': 'ProgressController.calculateCompletionStatus',
+
+
+  //Course routes
+  'GET /api/course': 'CourseController.getAllCourses',
+  'GET /api/course/:id': 'CourseController.getCourseById',
+  'POST /api/course': 'CourseController.createCourse',
+  'POST /api/course/:id': 'CourseController.updateCourse',
+  'DELETE /api/course/:id': 'CourseController.deleteCourse',
+
+
+  //CERTIFICATE ROUTES
+  'POST /api/certificate/generate': 'CertificateController.generateCertificate',
+  'GET /api/certificate/:id/download': 'CertificateController.downloadCertificate',
+
 };
